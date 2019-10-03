@@ -1,5 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "init.h"
 
 int main(int argc, char const *argv[])
 {	if(argc == 2){
