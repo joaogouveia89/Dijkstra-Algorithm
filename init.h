@@ -20,5 +20,6 @@ typedef struct _link Link;
 #include "link.h"
 #include "link_linked_list.h"
 #include "node.h"
+#include "dijkstra.h"
 
 #endif // INIT_H

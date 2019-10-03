@@ -3,13 +3,13 @@
 
 struct _node
 {
-	int number;
+	char id;
 	LinkLinkedList* links;
 };
 
-Node* init_node(int number){
+Node* init_node(char id){
 	Node* n = (Node*) malloc(sizeof(Node));
-	n->number = number;
+	n->id = id;
 	n->links = NULL;
 }
 
