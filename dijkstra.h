@@ -1,8 +1,8 @@
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
-#define INPUT_TYPE_ID = 0;
-#define INPUT_TYPE_SIZE = 1;
+#define INPUT_TYPE_ID  0;
+#define INPUT_TYPE_SIZE  1;
 
 int is_valid_input(char c, int inputType){
 

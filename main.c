@@ -13,5 +13,9 @@ int main(int argc, char *argv[])
 	}else{
 		printf("Input must be only the file path with the input file\n");
 	}
+
+	int c = strtoi("392");
+	int d = c + 4;
+	printf("n = %i\n", d);
 	return 0;
 }

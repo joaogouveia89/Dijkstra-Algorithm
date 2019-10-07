@@ -17,6 +17,7 @@ typedef struct _link Link;
 /**
 * CUSTOM HEADERS
 */
+#include "joaostdlib.h"
 #include "link.h"
 #include "link_linked_list.h"
 #include "node.h"
