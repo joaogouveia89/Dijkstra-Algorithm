@@ -17,7 +17,7 @@ LinkLinkedList* lll_add(LinkLinkedList* list, Link* element){
 	LinkLinkedList* newlllel = (LinkLinkedList*) malloc(sizeof(LinkLinkedList));
 	newlllel->link = element;
 	newlllel->next = newlllel;
-	newlllel->next = newlllel;
+	newlllel->previous = newlllel;
 
 	if(list == NULL){
 		list = newlllel;
