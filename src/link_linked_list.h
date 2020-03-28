@@ -35,10 +35,12 @@ LinkLinkedList* lll_add(LinkLinkedList* list, Link* element){
 void lll_print_linked_nodes(LinkLinkedList* list){
 	LinkLinkedList* aux = list->next;
 	if(aux == list){
-		printf("%c\n", aux->link->node->id);
+		printf("%d\n", aux->link->node->id);
 	}else{
+		printf("%d, ", list->link->node->id);
 		while(aux != list){
-			printf("%c, ", aux->link->node->id);
+			printf("%d, ", aux->link->node->id);
+			aux = aux->next;
 		}
 		printf("\n");
 	}
