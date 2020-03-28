@@ -57,10 +57,12 @@ Node* node_exists(NodeLinkedList* list, int nodeId){
 void nll_print_linked_nodes(NodeLinkedList* list){
 	NodeLinkedList* aux = list->next;
 	if(aux == list){
-		printf("%c\n", aux->node->id);
+		printf("%d\n", aux->node->id);
 	}else{
+		printf("%d, ", list->node->id);
 		while(aux != list){
-			printf("%c, ", aux->node->id);
+			printf("%d, ", aux->node->id);
+			aux = aux->next;
 		}
 		printf("\n");
 	}
