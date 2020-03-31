@@ -11,6 +11,7 @@
 * CUSTOM HEADERS
 */
 #include "char_extension.h"
+#include "dmatrix.h"
 #include "parser.h"
 
 #endif // INIT_H
