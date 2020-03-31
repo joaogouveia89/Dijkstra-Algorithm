@@ -9,6 +9,10 @@ void fromFile(char* path)
 
 	Matrix* matrix = newMatrix();
 
+	matrix = add(matrix, '1');
+
+	printf("%f\n", matrix->root->element);
+
 	int linePosition = 0;
 
 	/*reading file*/
