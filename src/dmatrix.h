@@ -45,6 +45,30 @@ Array* array_add(Array* root, float element){
 	return root;
 }
 
+Array* array_dealloc(Array* root){
+	Array* last = root->next;
+	Array* current = root->next->next;
+	while(current != root){
+		free(last);
+		last = current;
+		current = current->next;
+	}
+	free(root);
+	return NULL;
+}
+
+void array_print_debug(Array* root){
+	if(root != NULL){
+		Array* aux = root->next;
+		printf("%f, ", root->element);
+		while(aux->next != root){
+			printf("%f, ", aux->element);
+			aux = aux->next;
+		}
+		printf("%f\n", aux->element);
+	}
+}
+
 Matrix* newMatrix()
 {
 	Matrix* matrix = (Matrix*) malloc(sizeof(Matrix));
@@ -63,6 +87,24 @@ Matrix* add(Matrix* matrix, char element)
 		matrix->root = array_add(matrix->root, value);
 	}
 	return matrix;
+}
+
+Matrix* matrix_dealloc(Matrix* matrix){
+	if(matrix != NULL){
+		matrix->root = array_dealloc(matrix->root);
+	}
+	free(matrix);
+	return NULL;
+}
+
+Matrix* set_matrix_width(Matrix* root, int width){
+	root->width = width;
+	return root;
+}
+
+Matrix* set_matrix_heigth(Matrix* root, int height){
+	root->height = height;
+	return root;
 }
 
 #endif

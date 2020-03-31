@@ -9,11 +9,9 @@ void fromFile(char* path)
 
 	Matrix* matrix = newMatrix();
 
-	matrix = add(matrix, '1');
-
-	printf("%f\n", matrix->root->element);
-
 	int linePosition = 0;
+	int width = 0;
+	int height = 0;
 
 	/*reading file*/
 	while(fgets(buffer, sizeof(buffer), file) != NULL){
