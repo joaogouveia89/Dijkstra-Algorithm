@@ -78,13 +78,12 @@ Matrix* newMatrix()
 	return matrix;
 }
 
-Matrix* add(Matrix* matrix, char element)
+Matrix* add(Matrix* matrix, float element)
 {
 	if(matrix == NULL){
 		return matrix;
 	}else{
-		float value = getMatrixValue(element);
-		matrix->root = array_add(matrix->root, value);
+		matrix->root = array_add(matrix->root, element);
 	}
 	return matrix;
 }

@@ -38,8 +38,6 @@ void fromFile(char* path)
 		}
 		matrix = set_matrix_heigth(matrix, matrix->height + 1);
 	}
-
-	printf("width = %i, height = %i\n", matrix->width, matrix->height);
 }
 
 #endif
