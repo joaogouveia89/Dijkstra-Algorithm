@@ -49,6 +49,7 @@ int ctoi(char c){
 		case '9':
 			return 9;
 	}
+	return -1;
 }
 
 float getMatrixValue(char c){
