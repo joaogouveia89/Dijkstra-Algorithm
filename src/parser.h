@@ -64,12 +64,14 @@ void fromFile(char* path)
 				currentNumberChar = ctoi(buffer[linePosition]);
 				if(currentNumberChar != -1){
 					currentNumber = currentNumber * 10 + currentNumberChar;
+					printf("currentNumber = %i\n", currentNumber);
 				}else if(buffer[linePosition] == EMPTY_SPACE || buffer[linePosition] == LINE_BREAK){
 					state = STATE_2;
 				}else{
 					hasError = 1;
 				}
 			}else if(state == STATE_2){
+				printf("adding %i\n", currentNumber);
 				matrix = add(matrix, (float) currentNumber);
 				currentNumber = 0;
 				if(buffer[linePosition] == EMPTY_SPACE || buffer[linePosition] == LINE_BREAK){
@@ -78,10 +80,10 @@ void fromFile(char* path)
 					hasError = 1;
 				}
 			}else if(state == STATE_3){
+				printf("adding -1\n");
 				matrix = add(matrix, (float) -1);
 				if(buffer[linePosition] == EMPTY_SPACE || buffer[linePosition] == LINE_BREAK){
 					state = STATE_0;
-					linePosition++;
 				}else{
 					hasError = 1;
 				}
