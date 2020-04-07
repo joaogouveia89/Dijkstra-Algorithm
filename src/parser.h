@@ -14,6 +14,16 @@
 	VARIABLE TYPE = FLOAT -> UNIT SIZE = 1.2E-38 to 3.4E+38, 6 decimal places
 	MAX LINK NUMBER = 10.000(arbitrary choice for security)
 */
+
+/**
+* function to convert a char* number to float
+* params: 
+* char* number => number to be converted
+* numberSize => size of the number to be converted
+* if the number is infinite, returns -1
+* if the number is invalid returns -2
+* otherwise returns the converted number
+*/
 float readNumber(char* number, int numberSize){
 	int beforeSeparator = 0;
 	int afterSeparator = 0;
@@ -22,6 +32,10 @@ float readNumber(char* number, int numberSize){
 	int currentCharInt;
 	int isReadingDecimal = 1;
 	int hasError = 0;
+
+	if(numberSize == 1 && number[0] == 'i'){
+		return -1.0;
+	}
 	for(index = 0; index < numberSize && hasError == 0; index++){
 		currentCharInt = ctoi(number[index]);
 		if(currentCharInt == -1 && number[index] != DECIMAL_SEPARATOR){
@@ -37,11 +51,43 @@ float readNumber(char* number, int numberSize){
 			}
 		}
 	}
+	if(hasError == 1){
+		return -2.0;
+	}
 	return beforeSeparator + afterSeparator/(float)separatorDivider;
 }
 
-int readLine(char* line){
-	return 1;
+Matrix* readLine(Matrix* matrix, char* line){
+	char numBuffer[11]; //consider that the max number lenght will be 9999.999999
+	int lineIndex = 0;
+	int bufferIndex = 0;
+	float number;
+	int isFirstLine = 0;
+
+	if(matrix->root == NULL){
+		isFirstLine = 1;
+	}
+	while(line[lineIndex] != LINE_BREAK && line[lineIndex] != EOF){
+		if(line[lineIndex] != EMPTY_SPACE){
+			numBuffer[bufferIndex] = line[lineIndex];
+			bufferIndex++;
+		}else{
+			number = readNumber(numBuffer, bufferIndex);
+			matrix = add(matrix, number);
+			if(isFirstLine == 1){
+				matrix = set_matrix_width(matrix, matrix->width + 1);
+			}
+			bufferIndex = 0;
+		}
+		lineIndex++;
+	}
+
+	number = readNumber(numBuffer, bufferIndex);
+	matrix = add(matrix, number);
+	if(isFirstLine == 1){
+		matrix = set_matrix_width(matrix, matrix->width + 1);
+	}
+	return matrix;
 }
 
 void fromFile(char* path)
@@ -52,21 +98,15 @@ void fromFile(char* path)
 
 	Matrix* matrix = newMatrix();
 
-	int linePosition = 0;
-	int width = 0;
-	int height = 0;
-	float currentNumber = 0;
-	int currentPosition;
-	int hasError = 0;
-	int currentLine = 0;
-
 	/*reading file*/
-	while(fgets(buffer, sizeof(buffer), file) != NULL && hasError == 0){
-		linePosition = 0;
-		currentLine++;
+	while(fgets(buffer, sizeof(buffer), file) != NULL){
 		/*reading line*/
-		readLine(buffer);
+		matrix = readLine(matrix, buffer);
+		matrix = set_matrix_height(matrix, matrix->height + 1);
 	}
+
+	array_print_debug(matrix->root);
+	printf("width = %i\n", matrix->width);
 }
 
 #endif

@@ -101,7 +101,7 @@ Matrix* set_matrix_width(Matrix* root, int width){
 	return root;
 }
 
-Matrix* set_matrix_heigth(Matrix* root, int height){
+Matrix* set_matrix_height(Matrix* root, int height){
 	root->height = height;
 	return root;
 }
