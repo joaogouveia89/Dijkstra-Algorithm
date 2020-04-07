@@ -2,29 +2,46 @@
 #define PARSER_H
 
 #define EMPTY_SPACE ' '
-#define LINE_BREAK '\0'
+#define LINE_BREAK '\n'
 #define INFINITE 'i'
+#define DECIMAL_SEPARATOR '.'
 
 #define KRED  "\x1B[31m"
 #define KWHT  "\x1B[37m"
 
-#define STATE_0 0
-#define STATE_1 1
-#define STATE_2 2
-#define STATE_3 3
-
 /*
-GRAMMAR
-
-0 -> NUMBER - 1; (EMPTY_SPACE/LINE_BREAK) - 0; INFINITE - 3
-1 -> NUMBER - 1; (EMPTY_SPACE/LINE_BREAK) - 2
-2 -> (EMPTY_SPACE/LINE_BREAK) - 0
-3 -> (EMPTY_SPACE/LINE_BREAK) - 2
+	MAX GRAPH NODES NUMBER = 1000
+	VARIABLE TYPE = FLOAT -> UNIT SIZE = 1.2E-38 to 3.4E+38, 6 decimal places
+	MAX LINK NUMBER = 10.000(arbitrary choice for security)
 */
+float readNumber(char* number, int numberSize){
+	int beforeSeparator = 0;
+	int afterSeparator = 0;
+	int separatorDivider = 1;
+	int index;
+	int currentCharInt;
+	int isReadingDecimal = 1;
+	int hasError = 0;
+	for(index = 0; index < numberSize && hasError == 0; index++){
+		currentCharInt = ctoi(number[index]);
+		if(currentCharInt == -1 && number[index] != DECIMAL_SEPARATOR){
+			hasError = 1;
+		}else if(currentCharInt == -1){
+			isReadingDecimal = 0;
+		}else{
+			if(isReadingDecimal){
+				beforeSeparator = beforeSeparator * 10 + currentCharInt;
+			}else{
+				separatorDivider *= 10;
+				afterSeparator = afterSeparator * 10 + currentCharInt;
+			}
+		}
+	}
+	return beforeSeparator + afterSeparator/(float)separatorDivider;
+}
 
-void throwInvalidCharacterError(char* line, int linePosition){
-	printf("%sERROR:\n", KRED);
-	printf("Invalid character: %c%s\n", line[linePosition], KWHT);
+int readLine(char* line){
+	return 1;
 }
 
 void fromFile(char* path)
@@ -38,61 +55,18 @@ void fromFile(char* path)
 	int linePosition = 0;
 	int width = 0;
 	int height = 0;
-	int currentNumber = 0;
+	float currentNumber = 0;
 	int currentPosition;
 	int hasError = 0;
-	int state = STATE_0;
-	int currentNumberChar;
+	int currentLine = 0;
 
 	/*reading file*/
 	while(fgets(buffer, sizeof(buffer), file) != NULL && hasError == 0){
 		linePosition = 0;
+		currentLine++;
 		/*reading line*/
-		while(buffer[linePosition] != LINE_BREAK && hasError == 0){
-			if(state == STATE_0){
-				currentNumberChar = ctoi(buffer[linePosition]);
-				if(currentNumberChar != -1){
-					currentNumber = currentNumber * 10 + currentNumberChar;
-					state = STATE_1;
-				}else if(buffer[linePosition] == INFINITE){
-					state = STATE_3;
-				}else if(buffer[linePosition] != EMPTY_SPACE && buffer[linePosition] != LINE_BREAK){
-					hasError = 1;
-				}
-				linePosition++;
-			}else if(state == STATE_1){
-				currentNumberChar = ctoi(buffer[linePosition]);
-				if(currentNumberChar != -1){
-					currentNumber = currentNumber * 10 + currentNumberChar;
-					printf("currentNumber = %i\n", currentNumber);
-				}else if(buffer[linePosition] == EMPTY_SPACE || buffer[linePosition] == LINE_BREAK){
-					state = STATE_2;
-				}else{
-					hasError = 1;
-				}
-			}else if(state == STATE_2){
-				printf("adding %i\n", currentNumber);
-				matrix = add(matrix, (float) currentNumber);
-				currentNumber = 0;
-				if(buffer[linePosition] == EMPTY_SPACE || buffer[linePosition] == LINE_BREAK){
-					state = STATE_0;
-				}else{
-					hasError = 1;
-				}
-			}else if(state == STATE_3){
-				printf("adding -1\n");
-				matrix = add(matrix, (float) -1);
-				if(buffer[linePosition] == EMPTY_SPACE || buffer[linePosition] == LINE_BREAK){
-					state = STATE_0;
-				}else{
-					hasError = 1;
-				}
-			}
-		}
+		readLine(buffer);
 	}
-
-	array_print_debug(matrix->root);
-	printf("has error %i\n", hasError);
 }
 
 #endif
