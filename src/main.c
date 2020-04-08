@@ -4,7 +4,9 @@ int main(int argc, char *argv[])
 {	
 	if(argc == 2){
 		char* inputFileName = argv[1];
-		fromFile(inputFileName);
+		Matrix* distanceMatrix = NULL;
+		
+		distanceMatrix = fromFile(inputFileName);
 	}else{
 		printf("Input must be only the file path with the input file\n");
 	}

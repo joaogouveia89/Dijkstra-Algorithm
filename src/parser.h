@@ -5,6 +5,7 @@
 #define LINE_BREAK '\n'
 #define INFINITE 'i'
 #define DECIMAL_SEPARATOR '.'
+#define END_OF_FILE '\0'
 
 #define KRED  "\x1B[31m"
 #define KWHT  "\x1B[37m"
@@ -67,7 +68,7 @@ Matrix* readLine(Matrix* matrix, char* line){
 	if(matrix->root == NULL){
 		isFirstLine = 1;
 	}
-	while(line[lineIndex] != LINE_BREAK && line[lineIndex] != EOF){
+	while(line[lineIndex] != LINE_BREAK && line[lineIndex] != END_OF_FILE){
 		if(line[lineIndex] != EMPTY_SPACE){
 			numBuffer[bufferIndex] = line[lineIndex];
 			bufferIndex++;
@@ -90,7 +91,7 @@ Matrix* readLine(Matrix* matrix, char* line){
 	return matrix;
 }
 
-void fromFile(char* path)
+Matrix* fromFile(char* path)
 {
 	char buffer[5000];
 	FILE* file;
@@ -105,8 +106,7 @@ void fromFile(char* path)
 		matrix = set_matrix_height(matrix, matrix->height + 1);
 	}
 
-	array_print_debug(matrix->root);
-	printf("width = %i\n", matrix->width);
+	return matrix;
 }
 
 #endif
