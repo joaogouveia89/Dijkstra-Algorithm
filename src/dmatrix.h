@@ -106,4 +106,15 @@ Matrix* set_matrix_height(Matrix* root, int height){
 	return root;
 }
 
+float get(Matrix* root, int line, int column){
+	int arrayPosition = (line * root->width) + column;
+	Array* aux = root->root;
+	int idx = 0;
+	while(idx < arrayPosition){
+		aux = aux->next;
+		idx++;
+	}
+	return aux->element;
+}
+
 #endif
