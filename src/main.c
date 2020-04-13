@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 		    glClearColor(0.0, 0.0, 0.0, 0.0);         // black background
 			glMatrixMode(GL_PROJECTION);              // setup viewing projection
 			glLoadIdentity();                           // start with identity matrix
-			glOrtho(0.0, 10.0, 0.0, 10.0, -1.0, 1.0);   // setup a 10x10x2 viewing world
+			glOrtho(0.0, 50.0, 0.0, 50.0, 0.0, 0.1);   // setup a 10x10x2 viewing world
 		    glutDisplayFunc(display);
 		    glutReshapeFunc(resize);
 		    glutMainLoop();
@@ -41,16 +41,10 @@ void display() {
 	Matrix* distanceMatrix = NULL;
 	distanceMatrix = fromFile(inputFileName);
 	printf("Finish input parsing...\n");
-    glClear( GL_COLOR_BUFFER_BIT);
- 	glColor3f(0.0, 1.0, 0.0);
-
-    glBegin(GL_POLYGON);
-	  glVertex3f(2.0, 4.0, 0.0);
-	  glVertex3f(8.0, 4.0, 0.0);
-	  glVertex3f(8.0, 6.0, 0.0);
-	  glVertex3f(2.0, 6.0, 0.0);
-	 glEnd();
-
+	glClear( GL_COLOR_BUFFER_BIT);
+    drawNode(20, 20, 1);
+    drawNode(35, 35, 2);
+    drawLink(10, 10, 18, 18);
     glFlush();
 }
 
