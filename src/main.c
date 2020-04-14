@@ -39,8 +39,11 @@ int main(int argc, char *argv[])
 
 void display() {
 	Matrix* distanceMatrix = NULL;
+	PalleteNodePosition* nodesPositions = NULL;
 	distanceMatrix = fromFile(inputFileName);
 	printf("Finish input parsing...\n");
+	nodesPositions = calculateNodesPositions(distanceMatrix);
+	printf("Finish calculating nodes position on screen...\n");
 	glClear( GL_COLOR_BUFFER_BIT);
     drawNode(20, 20, 1);
     drawNode(35, 35, 2);

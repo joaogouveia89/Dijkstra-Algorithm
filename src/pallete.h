@@ -12,6 +12,20 @@
 
 #define NODE_CIRCLE_RADIUS 2.5f
 
+typedef struct pallete_node_position PalleteNodePosition;
+
+struct pallete_node_position
+{
+	float x;
+	float y;
+	PalleteNodePosition* next;
+};
+
+PalleteNodePosition* calculateNodesPositions(Matrix* matrix){
+	PalleteNodePosition* root = NULL;
+	return root;
+}
+
 void drawLink(int fromX, int fromY, int toX, int toY){
 	glColor3f(LINK_R, LINK_G,LINK_B); 
 	glLineWidth(2.0);
