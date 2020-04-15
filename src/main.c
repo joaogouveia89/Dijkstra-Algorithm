@@ -45,8 +45,11 @@ void display() {
 	nodesPositions = calculateNodesPositions(distanceMatrix);
 	printf("Finish calculating nodes position on screen...\n");
 	glClear( GL_COLOR_BUFFER_BIT);
-    drawNode(20, 20, 1);
-    drawNode(35, 35, 2);
+	Point square1, square2;
+	square1.x = square1.y = 20.0f;
+	square2.x = square1.y = 35.0f;
+    drawNode(square1, 1);
+    drawNode(square2, 2);
     drawLink(10, 10, 18, 18);
     glFlush();
 }
@@ -60,10 +63,9 @@ void resize(int w, int h){
 */
 
  void testFunction(){
- 	Matrix* distanceMatrix = NULL;
- 	distanceMatrix = fromFile("input.txt");
- 	float a = get(distanceMatrix, 4, 2);
- 	printf("a = %f\n", a);
+ 	Point p1, p2;
+ 	p2.x = 2.0f;
+ 	p2.y = -3.0f;
  }
 
  int isTest(char* input){

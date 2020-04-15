@@ -10,14 +10,13 @@
 #define LINK_G 0.89f
 #define LINK_B 0.01f
 
-#define NODE_CIRCLE_RADIUS 2.5f
+#define SQUARE_SIZE 2.0f
 
 typedef struct pallete_node_position PalleteNodePosition;
 
 struct pallete_node_position
 {
-	float x;
-	float y;
+	Point point;
 	PalleteNodePosition* next;
 };
 
@@ -27,7 +26,7 @@ PalleteNodePosition* calculateNodesPositions(Matrix* matrix){
 }
 
 void drawLink(int fromX, int fromY, int toX, int toY){
-	glColor3f(LINK_R, LINK_G,LINK_B); 
+	glColor3f(LINK_R, LINK_G,LINK_B);
 	glLineWidth(2.0);
 	glBegin(GL_LINES);
             glVertex2f(fromX,fromY);
@@ -35,16 +34,14 @@ void drawLink(int fromX, int fromY, int toX, int toY){
      glEnd();
 }
 
-void drawNode(int originX, int originY, int id){
+void drawNode(Point nodeCenterPoint, int nodeId){
  	glColor3f(NODE_R, NODE_G, NODE_B);
- 	int theta = 0;
-    float x,y;
+    float halfSquareSize = SQUARE_SIZE/(float)2;
     glBegin(GL_POLYGON);
-    for(theta = 0; theta < 360; theta++){
-    	x = NODE_CIRCLE_RADIUS * sin(theta) + originX;
-    	y = -NODE_CIRCLE_RADIUS * cos(theta) + originY;
-		glVertex2f(x, y);
-    }
+    	glVertex2f(nodeCenterPoint.x-halfSquareSize, nodeCenterPoint.y+halfSquareSize);
+    	glVertex2f(nodeCenterPoint.x+halfSquareSize, nodeCenterPoint.y+halfSquareSize);
+    	glVertex2f(nodeCenterPoint.x+halfSquareSize, nodeCenterPoint.y-halfSquareSize);
+    	glVertex2f(nodeCenterPoint.x-halfSquareSize, nodeCenterPoint.y-halfSquareSize);
 	 glEnd();
 }
 

@@ -30,6 +30,7 @@
 #include "char_extension.h"
 #include "dmatrix.h"
 #include "parser.h"
+#include "geometry.h"
 #include "pallete.h"
 
 #endif // INIT_H
