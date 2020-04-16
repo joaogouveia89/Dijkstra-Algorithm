@@ -43,6 +43,7 @@ void drawNode(Point nodeCenterPoint, int nodeId){
     	glVertex2f(nodeCenterPoint.x+halfSquareSize, nodeCenterPoint.y-halfSquareSize);
     	glVertex2f(nodeCenterPoint.x-halfSquareSize, nodeCenterPoint.y-halfSquareSize);
 	 glEnd();
+     renderNumber(nodeCenterPoint.x,nodeCenterPoint.y, nodeId);
 }
 
 #endif

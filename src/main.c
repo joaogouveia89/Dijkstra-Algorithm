@@ -47,7 +47,7 @@ void display() {
 	glClear( GL_COLOR_BUFFER_BIT);
 	Point square1, square2;
 	square1.x = square1.y = 20.0f;
-	square2.x = square1.y = 35.0f;
+	square2.x = square2.y = 35.0f;
     drawNode(square1, 1);
     drawNode(square2, 2);
     drawLink(10, 10, 18, 18);

@@ -31,6 +31,7 @@
 #include "dmatrix.h"
 #include "parser.h"
 #include "geometry.h"
+#include "font.h"
 #include "pallete.h"
 
 #endif // INIT_H
