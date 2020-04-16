@@ -10,7 +10,7 @@
 #define LINK_G 0.89f
 #define LINK_B 0.01f
 
-#define SQUARE_SIZE 2.0f
+#define SQUARE_MINIMUM_SIZE 2.0f
 
 typedef struct pallete_node_position PalleteNodePosition;
 
@@ -34,16 +34,27 @@ void drawLink(int fromX, int fromY, int toX, int toY){
      glEnd();
 }
 
-void drawNode(Point nodeCenterPoint, int nodeId){
+void drawNode(Point nodeCenterPoint, int nodeId, int nodeCount){
  	glColor3f(NODE_R, NODE_G, NODE_B);
-    float halfSquareSize = SQUARE_SIZE/(float)2;
+    float squareSize;
+    float factor = 0;
+
+    int aux = nodeCount/10;
+    while(aux > 0){
+        factor += 0.3;
+        aux /= 10;
+    }
+
+    squareSize = SQUARE_MINIMUM_SIZE + factor;
+     
+    float halfSquareSize = squareSize/(float)2;
     glBegin(GL_POLYGON);
     	glVertex2f(nodeCenterPoint.x-halfSquareSize, nodeCenterPoint.y+halfSquareSize);
     	glVertex2f(nodeCenterPoint.x+halfSquareSize, nodeCenterPoint.y+halfSquareSize);
     	glVertex2f(nodeCenterPoint.x+halfSquareSize, nodeCenterPoint.y-halfSquareSize);
     	glVertex2f(nodeCenterPoint.x-halfSquareSize, nodeCenterPoint.y-halfSquareSize);
 	 glEnd();
-     renderNumber(nodeCenterPoint.x,nodeCenterPoint.y, nodeId);
+     renderNumber(nodeCenterPoint.x,nodeCenterPoint.y, nodeId, factor);
 }
 
 #endif
