@@ -20,8 +20,37 @@ struct pallete_node_position
 	PalleteNodePosition* next;
 };
 
+PalleteNodePosition* add_position(PalleteNodePosition* root, Point position){
+    PalleteNodePosition* newPosition = (PalleteNodePosition*) malloc(sizeof(PalleteNodePosition));
+    newPosition->point = position;
+    newPosition->next = NULL;
+
+    PalleteNodePosition* aux = root;
+
+    if(aux == NULL){
+        root = newPosition;
+    }else{
+        while(aux->next != NULL){
+            aux = aux->next;
+        }
+        aux->next = newPosition;
+    }
+    return root;
+}
+
 PalleteNodePosition* calculateNodesPositions(Matrix* matrix){
 	PalleteNodePosition* root = NULL;
+    int index = 0;
+    float x = 2;
+    float y = 48;
+    for(index = 0; index < matrix->width; index++){
+        Point point;
+        point.x = x;
+        point.y = y;
+        root = add_position(root, point);
+        x+=5;
+        y-=5;
+    }
 	return root;
 }
 
@@ -55,6 +84,17 @@ void drawNode(Point nodeCenterPoint, int nodeId, int nodeCount){
     	glVertex2f(nodeCenterPoint.x-halfSquareSize, nodeCenterPoint.y-halfSquareSize);
 	 glEnd();
      renderNumber(nodeCenterPoint.x,nodeCenterPoint.y, nodeId, factor);
+}
+
+void drawNodes(PalleteNodePosition* nodes, int nodeCount){
+    PalleteNodePosition* aux = nodes;
+    int index = 0;
+    while(aux != NULL){
+        drawNode(aux->point, index, nodeCount);
+        index++;
+        aux = aux->next;
+    }
+
 }
 
 #endif
