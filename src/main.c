@@ -22,8 +22,9 @@ int main(int argc, char *argv[])
 		    glClearColor(0.0, 0.0, 0.0, 0.0);         // black background
 			glMatrixMode(GL_PROJECTION);              // setup viewing projection
 			glLoadIdentity();                           // start with identity matrix
-			glOrtho(0.0, 50.0, 0.0, 50.0, 0.0, 0.1);   // setup a 10x10x2 viewing world
+			glOrtho(0.0, 50.0, 0.0, 50.0, 0.0, 0.1);   // setup a 50x50 viewing world
 		    glutDisplayFunc(display);
+		    printf("resizing...\n");
 		    glutReshapeFunc(resize);
 		    glutMainLoop();
 		}
@@ -51,7 +52,10 @@ void display() {
 }
 
 void resize(int w, int h){
-    glutReshapeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+	printf("w = %i\n", w);
+	if(w != WINDOW_WIDTH || h != WINDOW_HEIGHT){
+		glutReshapeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+	}
 }
 
 /**
