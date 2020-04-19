@@ -10,7 +10,7 @@
 #define LINK_G 0.89f
 #define LINK_B 0.01f
 
-#define SQUARE_MINIMUM_SIZE 2.0f
+#define SQUARE_MINIMUM_SIZE 4.0f
 
 typedef struct pallete_node_position PalleteNodePosition;
 
@@ -41,15 +41,15 @@ PalleteNodePosition* add_position(PalleteNodePosition* root, Point position){
 PalleteNodePosition* calculateNodesPositions(Matrix* matrix){
 	PalleteNodePosition* root = NULL;
     int index = 0;
-    float x = 2;
-    float y = 48;
+    float x = 30;
+    float y = 90;
     for(index = 0; index < matrix->width; index++){
         Point point;
         point.x = x;
         point.y = y;
         root = add_position(root, point);
-        x+=5;
-        y-=5;
+        x+=10;
+        y-=10;
     }
 	return root;
 }
