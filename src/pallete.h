@@ -39,6 +39,9 @@ PalleteNodePosition* add_position(PalleteNodePosition* root, Point position){
 }
 
 PalleteNodePosition* calculateNodesPositions(Matrix* matrix){
+    // study this https://arxiv.org/pdf/1312.4082.pdf - page   48
+    // study this arcticle - current page: 19
+    // https://books.google.pt/books?id=TdSp9iq8p5sC&pg=PA206&lpg=PA206&dq=algoritmos+melhor+localiza%C3%A7%C3%A3o&source=bl&ots=PUyh0jKuB1&sig=ACfU3U0qaiUmn-HHpz5d9Gm4hvK9pGJTFg&hl=en&sa=X&ved=2ahUKEwi7otHRwfboAhUj5uAKHT-UAkgQ6AEwA3oECAsQLA#v=onepage&q&f=false
 	PalleteNodePosition* root = NULL;
     int index = 0;
     float x = 30;
